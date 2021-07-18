@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_help().
+ * Implements hook_init().
  */
 
 function lista_post_init() {
@@ -27,10 +27,12 @@ function lista_post_init() {
 
 
 
-// in mymods.module
+/**
+ * Implements hook_menu().
+ */
+
 function lista_post_menu() {
 
-	// define your custom path here
     $items['post/listar'] = array(
       'page callback' => 'lista_post_custompage',
       'title' => 'Posts',
@@ -56,6 +58,10 @@ function lista_post_custompage() {
 	return theme('lista_post_custompage_template', array('posts' => $posts));
 }
 
+
+/**
+ * Implements hook_theme().
+ */
 function lista_post_theme() {
 	$themes = array (
 		'lista_post_custompage_template' => array(
