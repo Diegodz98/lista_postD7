@@ -1,0 +1,7 @@
+name = Lista_post
+description = Lista posts mediante una api externa
+package = Custom
+version = 1.00
+core = 7.x
+
+; Information added by Drupal.org packaging script on 2021-06-02

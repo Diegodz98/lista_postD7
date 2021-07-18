@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Enables the use of personal and site-wide contact forms.
+ */
+
+/**
+ * Implements hook_help().
+ */
+
+function lista_post_init() {
+
+	// Since this file should only be loaded on the front page, it cannot be
+	// declared in the info file.
+	
+	drupal_add_css(drupal_get_path('module', 'lista_post') . '/includes/css/estilos.css');
+	drupal_add_js(drupal_get_path('module', 'lista_post') . '/includes/js/xlsx.full.min.js');
+	drupal_add_js(drupal_get_path('module', 'lista_post') . '/includes/js/FileSaver.min.js');
+	drupal_add_js(drupal_get_path('module', 'lista_post') . '/includes/js/tableexport.min.js');
+	drupal_add_js(drupal_get_path('module', 'lista_post') . '/includes/js/app.js');
+
+
+
+	 
+  }
+
+
+
+// in mymods.module
+function lista_post_menu() {
+
+	// define your custom path here
+    $items['post/listar'] = array(
+      'page callback' => 'lista_post_custompage',
+      'title' => 'Posts',
+      'page arguments' => array(),
+      'access arguments' => array('access content'), 
+      'menu_name' => 'main-menu',
+
+    );  
+    return $items;
+}
+
+function lista_post_custompage() {
+	$options = array(
+		'method' => 'GET',
+		'timeout' => 15,
+	  );
+	  
+	  $result = drupal_http_request('https://jsonplaceholder.typicode.com/posts');
+
+	$posts= (json_decode($result->data));
+	
+
+	return theme('lista_post_custompage_template', array('posts' => $posts));
+}
+
+function lista_post_theme() {
+	$themes = array (
+		'lista_post_custompage_template' => array(
+			'template' => 'templates/custompage', // your template file called custompage.tpl.php
+			'arguments' => array(),
+		),
+	);
+	return $themes;
+}
+
