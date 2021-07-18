@@ -1,10 +1,4 @@
-<?php
-    
-    
-    ?>
-
-    
-<div class="contenedor">
+    <div class="contenedor">
     
     <div class="formulario">
         <input type="search" name="" id="filtro" placeholder="Buscar..." class="input-buscar">
